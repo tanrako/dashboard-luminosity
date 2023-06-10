@@ -46,7 +46,9 @@ describe('LuminosityRepository', () => {
   it('should return the highest subset of 5 consecutive luminosity values', async () => {
     const result = await luminosityRepository.getHighestSubsetValues();
 
-    expect(mockDatabase.all).toHaveBeenCalledWith('SELECT * FROM luminosity');
+    expect(mockDatabase.all).toHaveBeenCalledWith(
+      'SELECT * FROM luminosity ORDER BY timestamp DESC LIMIT 10',
+    );
     expect(result).toEqual([
       { value: 1.94, timestamp: '2023-06-08 16:20:39' },
       { value: 7.06, timestamp: '2023-06-08 16:20:37' },
